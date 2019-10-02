@@ -1,0 +1,19 @@
+.v-input {
+  width: 100%;
+  input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: $accent1;
+    border: 1px solid $lightgray;
+    box-shadow: none;
+    color: $darkgray;
+    padding: 5px 10px;
+
+  }
+
+  label {
+    padding: 10px 0;
+    display: block;
+  }
+}
