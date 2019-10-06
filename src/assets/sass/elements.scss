@@ -10,3 +10,15 @@
   }
 }
 
+.pill {
+  display: inline;
+  background-color: #e3e4e5;
+  color: $darkgray;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  &.has-margin-5 {
+    margin-right: 5px;
+  }
+}
+

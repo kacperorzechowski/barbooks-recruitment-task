@@ -13,7 +13,18 @@
   }
 
   label {
+    color: $darkgray;
+    font-weight: 600;
     padding: 10px 0;
     display: block;
+  }
+
+  .option-label {
+    padding: 5px 10px;
+
+    input {
+      display: inline;
+      width: auto;
+    }
   }
 }

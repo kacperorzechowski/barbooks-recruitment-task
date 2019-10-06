@@ -8,6 +8,8 @@
 
     <input
       :id="id"
+      :value="value"
+      @input="updateInput($event.target.value)"
     />
   </div>
 </template>
@@ -15,6 +17,10 @@
 <script>
 export default {
   name: 'VInput',
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
   props: {
     id: {
       type: String,
@@ -37,6 +43,11 @@ export default {
   computed: {
     showLabel () {
       return this.label !== false
+    }
+  },
+  methods: {
+    updateInput (inputValue) {
+      this.$emit('input', inputValue)
     }
   }
 }
