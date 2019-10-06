@@ -5,7 +5,7 @@ BarBooks recruitment task is a mini project, where candidates can register with 
 
 Project make use of custom sass styles, custom components for form controls and Vuex for storing and managing data.
 
-Whole task took me approximately _still in progress :)_.
+Whole task took me approximately 11 hours.
 ## Overview
 ### Home page
 ![](screenshots/home-page.png)
