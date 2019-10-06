@@ -1,11 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <candidates></candidates>
   </div>
 </template>
 
 <script>
+import Candidates from '../components/Candidates/Candidates'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { Candidates }
 }
 </script>
