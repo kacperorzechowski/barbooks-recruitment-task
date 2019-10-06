@@ -28,3 +28,13 @@
     }
   }
 }
+
+$errorColor: #ff444b;
+.has-error {
+  border: 1px solid #ff444b;
+}
+
+.input-error {
+  color: $errorColor;
+  font-size: 13px;
+}

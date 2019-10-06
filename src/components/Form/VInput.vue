@@ -7,16 +7,22 @@
       </span>
     </label>
 
-    <input
-      :id="id"
-      :value="value"
-      @input="updateInput($event.target.value)"
-    />
+    <ValidationProvider :name="name" :rules="rules" v-slot="{ errors }">
+      <input
+        :id="id"
+        :value="value"
+        :name="name"
+        :class="{'has-error': errors.length > 0}"
+        @input="updateInput($event.target.value)"
+      />
+      <span class="input-error">{{ errors[0] }}</span>
+    </ValidationProvider>
   </div>
 </template>
 
 <script>
 import VTooltip from '../VTooltip'
+
 export default {
   name: 'VInput',
   components: { VTooltip },
@@ -41,6 +47,14 @@ export default {
       type: [String, Boolean],
       required: false,
       default: false
+    },
+    rules: {
+      type: [String, Object],
+      required: false
+    },
+    name: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -57,5 +71,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  $errorColor: #ff444b;
+  .has-error {
+    border: 1px solid #ff444b;
+  }
 </style>

@@ -7,7 +7,8 @@
     </label>
 
     <div v-if="selectedOptions.length > 0" class="selected-elements">
-      <div class="pill has-margin-5" v-for="(item, index) of selectedOptions" :key="index" @click="removeItem(item)">
+      <div class="pill has-margin-5" v-for="(item, index) of selectedOptions" :key="index"
+           @click="removeItem(item)">
         {{ item }}
         <span>&times;</span>
       </div>
@@ -26,13 +27,16 @@
     </div>
 
     <div v-show="isExpanded" class="options">
-      <div v-for="(option, key) in filteredOptions" :key="key" class="option">
-        <label class="option-label">
-          <input type="checkbox" v-model="selectedOptions" :value="option" @change="emitValue"/>
-          {{ option }}
-        </label>
-      </div>
+      <ValidationProvider :name="name" :rules="rules" v-slot="{ errors }">
+        <div v-for="(option, key) in filteredOptions" :key="key" class="option">
+          <label class="option-label">
+            <input type="checkbox" v-model="selectedOptions" :value="option" @change="emitValue"/>
+            {{ option }}
+          </label>
+        </div>
+      </ValidationProvider>
     </div>
+
   </div>
 </template>
 
@@ -59,6 +63,14 @@ export default {
     options: {
       type: Array,
       required: true
+    },
+    rules: {
+      type: [String, Object],
+      required: false
+    },
+    name: {
+      type: String,
+      required: false
     }
   },
   data: function () {
@@ -106,6 +118,7 @@ export default {
   .options {
     background: $accent1;
     border: 1px solid $lightgray;
+
     label {
       font-weight: 200;
       font-size: 14px;

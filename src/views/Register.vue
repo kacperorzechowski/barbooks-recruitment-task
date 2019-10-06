@@ -1,11 +1,21 @@
 <template>
   <div>
     <h1>Register</h1>
-    <v-input v-model="form.name" id="name" label="Name" :tooltip="nameTooltip"></v-input>
-    <v-input v-model="form.email" id="email" label="Email"></v-input>
-    <v-select v-model="form.skills" id="skills" label="Skills" :options="skills"></v-select>
 
-    <v-button class="text-right mt-1-5" @click.native="sendForm">Send</v-button>
+    <validation-observer ref="observer" v-slot="{ invalid, errors }" tag="form" @submit.prevent="submit()">
+      <v-input v-model="form.name" id="name" name="Name" label="Name" :tooltip="nameTooltip"
+               rules="required"></v-input>
+      <v-input v-model="form.email" id="email" name="Email" label="Email"
+               rules="required|email"></v-input>
+      <v-select v-model="form.skills" id="skills" name="Skills" label="Skills" rules="required"
+                :options="skills"></v-select>
+      <span class="input-error">
+        {{ getFieldError('Skills', errors) }}
+      </span>
+
+      <v-button class="text-right mt-1-5">Send</v-button>
+    </validation-observer>
+
   </div>
 </template>
 
@@ -28,9 +38,16 @@ export default {
       email: null,
       skills: null
     },
-    nameTooltip: "Let's be friends, please provide your name so we can get in touch with you!"
+    nameTooltip: 'Let\'s be friends, please provide your name so we can get in touch with you!'
   }),
   methods: {
+    async submit () {
+      const isValid = await this.$refs.observer.validate()
+
+      if (isValid) {
+        this.sendForm()
+      }
+    },
     sendForm () {
       this.$store.commit('candidates/addCandidate', this.form)
       /*
@@ -39,6 +56,15 @@ export default {
        */
       alert('Your application was sent!')
       this.$router.push({ name: 'Home' })
+    },
+    getFieldError (name, errors) {
+      let error = ''
+
+      if (errors.hasOwnProperty(name)) {
+        error = errors[name][0]
+      }
+
+      return error
     }
   }
 }
