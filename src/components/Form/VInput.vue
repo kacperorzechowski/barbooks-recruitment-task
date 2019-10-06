@@ -3,6 +3,7 @@
     <label :for="id">
       <span v-show="showLabel" class="label-text">
         {{ label }}
+        <v-tooltip v-if="tooltip" :content="tooltip">i</v-tooltip>
       </span>
     </label>
 
@@ -15,8 +16,10 @@
 </template>
 
 <script>
+import VTooltip from '../VTooltip'
 export default {
   name: 'VInput',
+  components: { VTooltip },
   model: {
     prop: 'value',
     event: 'input'
